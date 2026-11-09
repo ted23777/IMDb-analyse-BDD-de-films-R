@@ -16,6 +16,47 @@ library(lme4)
 library(MuMIn)
 
 
+#### 0. Chemins du projet ####
+chemin_donnees  <- file.path("data", "imdb.csv")  # .xlsx ou .csv acceptés
+dossier_figures <- file.path("docs", "figures")    # les graphiques y sont enregistrés automatiquement
+
+if (!file.exists(chemin_donnees)) {
+  stop("Fichier introuvable : ", chemin_donnees,
+       "\nVérifier que le script est lancé depuis la racine du projet et que le fichier est dans data/.")
+}
+dir.create(dossier_figures, recursive = TRUE, showWarnings = FALSE)
+
+# Afficher un graphique et l'enregistrer dans docs/figures
+sauver <- function(graphique, nom_fichier, largeur = 8, hauteur = 5) {
+  print(graphique)
+  ggsave(file.path(dossier_figures, nom_fichier), graphique,
+         width = largeur, height = hauteur, dpi = 150)
+}
+
+# Nuage de points Votes / Rate avec droite de régression et corrélation
+graphique_correlation <- function(donnees, titre) {
+  r <- cor(donnees$Votes, donnees$Rate)
+  ggplot(donnees, aes(x = Votes, y = Rate)) +
+    geom_point() +
+    geom_smooth(method = "lm", se = FALSE, color = "red") +
+    annotate("text", x = max(donnees$Votes), y = min(donnees$Rate),
+             label = paste("Corrélation =", round(r, 2)),
+             hjust = 1, vjust = 0, size = 4, fontface = "bold") +
+    labs(x = "Votes (en centaines de milliers)", y = "Notes", title = titre) +
+    theme_classic(base_size = 12) +
+    theme(plot.title = element_text(hjust = 0.5))
+}
+
+# Histogramme + densité d'une variable
+graphique_distribution <- function(donnees, variable, titre) {
+  ggplot(donnees, aes(x = .data[[variable]])) +
+    geom_histogram(aes(y = after_stat(density)), binwidth = 1, fill = "skyblue", color = "black") +
+    geom_density(alpha = 0.5, fill = "orange", color = "black") +
+    labs(title = titre, x = variable, y = "Densité") +
+    theme_classic() +
+    theme(plot.title = element_text(hjust = 0.5))
+}
+
 #### 1. IMPORTER ET COPIER LE DATASET ####
 #IMDb <- read.csv("data/imdb.csv", stringsAsFactors = FALSE)
 IMDb <- read.csv("data/imdb.csv", stringsAsFactors = FALSE)
@@ -150,10 +191,6 @@ ggplot(df_series_filtered, aes(x = Votes, y = Rate)) +
   theme(plot.title = element_text(hjust = 0.5))  # Centrer le titre du graphique
 
 
-
-
-
-
 #### 8. Comparer s'il y a le même nombre de films et de séries avec un test statistique pour variables nominales ####
 # Nous pourrions travailler directement sur df.
 # Mais si nous souhaitons concerver notre filtrage au dixième percentile appliqué à "df_films_filtered" et "df_series_filtered",
@@ -183,9 +220,6 @@ ggplot(df_table, aes(x = Type, y = Count, fill = Type)) +
   labs(x = "Type", y = "Count", title = "Comparaison du nombre de Films et Series") +
   theme_classic() +
   theme(plot.title = element_text(hjust = 0.5)) # Centrer le titre du graphique : ne pas mettre avant la ligne "theme_classic"()
-
-
-
 
 
 #### 9. Est-ce que les films et les séries sont, en moyenne, évaluées de manière équivalente ? ####
@@ -315,9 +349,6 @@ ggplot(df3.summary, aes(x = Evaluator, y = mean)) +
     legend.text = element_text(size = 24),  # Taille du texte de la légende
     axis.text = element_text(size = 20)  # Taille des graduations sur les axes
   )
-
-
-
 
 
 #### 11. En cas de besoin, voici l'équivalent non-paramétrique du t test pour échantillons appariés ####

@@ -1,0 +1,13 @@
+# Fichiers de session R
+.Rhistory
+.RData
+.Rdata
+.Ruserdata
+.Rproj.user/
+
+# Système
+.DS_Store
+Thumbs.db
+
+# Note : docs/figures/ n'est PAS ignoré — les graphiques sont versionnés
+# pour être visibles dans le README sur GitHub.

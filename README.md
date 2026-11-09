@@ -87,7 +87,7 @@ Le changement de classement après filtrage illustre l'intérêt d'écarter les 
 ## Utilisation
 
 1. Ouvrir le script dans RStudio
-2. Importer le jeu de données sous le nom `IMDb`
+2. Importer le jeu de données sous le nom `IMDb`, le tableur excel concerne un autre jeu de données qui m'a servi à prendre en main le langage R
 3. Installer les packages si nécessaire (lignes commentées en tête de script)
 4. Exécuter le script section par section (`#### n. ... ####`) pour suivre l'analyse et visualiser chaque graphique
 
