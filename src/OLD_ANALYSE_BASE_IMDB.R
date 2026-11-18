@@ -16,6 +16,11 @@ library(lme4)
 library(MuMIn)
 
 
+# AJOUTEZ CES LIGNES POUR RÉSOLVER LES CONFLITS :
+# On indique à R de préférer les fonctions de dplyr pour filter et lag
+# conflicts_prefer(dplyr::filter)
+# conflicts_prefer(dplyr::lag)
+
 #### 0. Chemins du projet ####
 chemin_donnees  <- file.path("data", "imdb.csv")  # .xlsx ou .csv acceptés
 dossier_figures <- file.path("docs", "figures")    # les graphiques y sont enregistrés automatiquement
