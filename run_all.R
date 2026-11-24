@@ -15,4 +15,7 @@ library(here)
 library(here)
 
 source(here("src", "01_import.R"))
+
 source(here("src", "02_exploration.R"), echo = TRUE)  # echo = TRUE : affiche les résultats
+
+source(here("src", "03_nettoyage.R"))
