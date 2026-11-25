@@ -5,9 +5,9 @@
 library(tidyverse)
 library(here)
 
-# Afficher un graphique et l'enregistrer dans output/figures
+# Afficher un graphique et l'enregistrer dans data/output/figures
 sauver <- function(graphique, nom_fichier, largeur = 8, hauteur = 5) {
-  dossier <- here("output", "figures")
+  dossier <- here("data", "output", "figures")
   dir.create(dossier, recursive = TRUE, showWarnings = FALSE)
   print(graphique)
   ggsave(file.path(dossier, nom_fichier), graphique,

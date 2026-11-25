@@ -19,6 +19,8 @@ df <- distinct(df)
 compter_lignes(df_avant, df, "Doublons")
 
 #### 2. Convertir les colonnes numériques ####
+
+df$Votes <- gsub(",", "", df$Votes) # Votes est écrit avec des séparateurs de milliers ("1,234") : on retire les virgules d'abord
 df <- convertir_en_nombre(df, "Date")
 df <- convertir_en_nombre(df, "Rate")
 df <- convertir_en_nombre(df, "Votes")

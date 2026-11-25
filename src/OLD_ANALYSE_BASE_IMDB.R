@@ -23,7 +23,7 @@ library(MuMIn)
 
 #### 0. Chemins du projet ####
 chemin_donnees  <- file.path("data", "imdb.csv")  # .xlsx ou .csv acceptés
-dossier_figures <- file.path("docs", "figures")    # les graphiques y sont enregistrés automatiquement
+dossier_figures <- file.path("data", "output", "docs", "figures")    # les graphiques y sont enregistrés automatiquement
 
 if (!file.exists(chemin_donnees)) {
   stop("Fichier introuvable : ", chemin_donnees,
@@ -31,7 +31,7 @@ if (!file.exists(chemin_donnees)) {
 }
 dir.create(dossier_figures, recursive = TRUE, showWarnings = FALSE)
 
-# Afficher un graphique et l'enregistrer dans docs/figures
+# Afficher un graphique et l'enregistrer dans data/output/docs/figures
 sauver <- function(graphique, nom_fichier, largeur = 8, hauteur = 5) {
   print(graphique)
   ggsave(file.path(dossier_figures, nom_fichier), graphique,
