@@ -66,8 +66,7 @@ IMDb-analyse-BDD-de-films-R/
 │   └── output/
 │       ├── tables/               # résultats des 5 questions (.csv)
 │       └── docs/figures/         # figures de la version actuelle (.png)
-└── docs/
-    └── figures/                  # figures de l'ancienne version d'exercice, pas encore nettoyées
+
 ```
 
 Chaque script lit le résultat du précédent, et charge lui-même les fonctions dont il a besoin (pour pouvoir tourner seul). Le chemin `data/output/docs/figures/` est un peu bizarre — c'est resté d'un essai de réorganisation, à corriger (voir « Pistes pour la suite »).
