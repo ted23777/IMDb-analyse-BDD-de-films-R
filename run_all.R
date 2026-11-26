@@ -21,3 +21,5 @@ source(here("src", "02_exploration.R"), echo = TRUE)  # echo = TRUE : affiche le
 source(here("src", "03_nettoyage.R"))
 
 source(here("src", "04_analyse.R"), echo = TRUE)
+
+source(here("src", "04_analyse.R"), echo = TRUE)  # echo = TRUE : affiche les résultats

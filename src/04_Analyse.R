@@ -11,6 +11,7 @@
 library(tidyverse)
 library(rstatix)
 library(here)
+library(coin)
 
 df <- readRDS(here("data", "processed", "03_propre.rds"))
 
